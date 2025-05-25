@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.21"
+    application
     `maven-publish`
     signing
 }
@@ -32,10 +33,44 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    
+    // Show test results in console
+    testLogging {
+        events("passed", "skipped", "failed", "standardOut", "standardError")
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+        
+        // Show individual test results
+        displayGranularity = 2
+        showStandardStreams = true
+    }
+    
+    // Generate detailed test reports
+    reports {
+        junitXml.required.set(true)
+        html.required.set(true)
+    }
+    
+    // Fail fast on first test failure (optional)
+    // failFast = true
+    
+    // Run tests in parallel (optional)
+    maxParallelForks = Runtime.getRuntime().availableProcessors().div(2).takeIf { it > 0 } ?: 1
+    
+    // Show test report location after tests complete
+    doLast {
+        println("\n📊 Test Report: file://${layout.buildDirectory.get().asFile.absolutePath}/reports/tests/test/index.html")
+    }
 }
 
 kotlin {
     jvmToolchain(21)
+}
+
+application {
+    mainClass.set("com.github.jhalak.spoe.examples.TestRunner")
 }
 
 publishing {
