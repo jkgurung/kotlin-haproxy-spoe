@@ -91,7 +91,6 @@ class SpopCodec {
     private fun decodeFrame(buffer: BufferedSource): SpopFrame {
         val frameType = FrameType.fromValue(buffer.readByte().toUByte())
             ?: throw IllegalArgumentException("Unknown frame type")
-        val flags = buffer.readByte()
         val streamId = readVarInt(buffer)
         val frameId = readVarInt(buffer)
         

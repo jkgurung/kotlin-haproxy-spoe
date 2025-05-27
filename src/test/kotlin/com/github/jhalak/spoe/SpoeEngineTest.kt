@@ -11,8 +11,7 @@ class SpoeEngineTest {
     
     @Test
     fun `test SPOE value serialization`() {
-        val codec = SpopCodec()
-        
+
         // Test basic values
         val values = listOf(
             SpoeValue.Null,

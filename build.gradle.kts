@@ -3,10 +3,11 @@ plugins {
     application
     `maven-publish`
     signing
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 group = "com.github.jhalak"
-version = "0.1.0-SNAPSHOT"
+version = "0.1.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -104,5 +105,22 @@ publishing {
                 }
             }
         }
+    }
+    
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/jhalak/kotlin-haproxy-spoe")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            }
+        }
+    }
+}
+
+tasks.javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+        (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
 }

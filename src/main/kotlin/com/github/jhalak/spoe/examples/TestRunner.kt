@@ -276,7 +276,7 @@ object TestRunner {
             action is SpoeAction.SetVariable &&
             action.name == "ip_score" &&
             action.value is SpoeValue.Int32 &&
-            (action.value as SpoeValue.Int32).value == 100
+            action.value.value == 100
         }
         if (test1Pass) passed++ else failed++
         printTestResult("Private IP", privateActions, test1Pass)
@@ -296,7 +296,7 @@ object TestRunner {
             action is SpoeAction.SetVariable &&
             action.name == "ip_score" &&
             action.value is SpoeValue.Int32 &&
-            (action.value as SpoeValue.Int32).value == 50
+            action.value.value == 50
         }
         if (test2Pass) passed++ else failed++
         printTestResult("Public IP", publicActions, test2Pass)
@@ -316,7 +316,7 @@ object TestRunner {
             action is SpoeAction.SetVariable &&
             action.name == "ip_score" &&
             action.value is SpoeValue.Int32 &&
-            (action.value as SpoeValue.Int32).value == 95
+            action.value.value == 95
         }
         if (test3Pass) passed++ else failed++
         printTestResult("Known Good IP", goodActions, test3Pass)
