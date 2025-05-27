@@ -17,7 +17,29 @@ This project provides an easy-to-use API for creating custom SPOA (Stream Proces
 
 ### 1. Add Dependency
 
+#### Option A: JitPack (Recommended)
 ```kotlin
+repositories {
+    maven { url = uri("https://jitpack.io") }
+}
+
+dependencies {
+    implementation("com.github.jkgurung:kotlin-haproxy-spoe:0.1.0")
+}
+```
+
+#### Option B: GitHub Packages
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/jkgurung/kotlin-haproxy-spoe")
+        credentials {
+            username = "your-github-username"
+            password = "your-github-token"
+        }
+    }
+}
+
 dependencies {
     implementation("com.github.jhalak:kotlin-haproxy-spoe:0.1.0")
 }
